@@ -1,0 +1,26 @@
+{
+  "name": "football-stats-with-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:build": "tsc -w",
+    "start:run" : "nodemon build/index.js",
+    "start" : "concurrently npm:start:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yocosaka/Football-Stats-with-TypeScript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yocosaka/Football-Stats-with-TypeScript/issues"
+  },
+  "homepage": "https://github.com/yocosaka/Football-Stats-with-TypeScript#readme",
+  "dependencies": {
+    "concurrently": "^6.3.0",
+    "nodemon": "^2.0.13"
+  }
+}
