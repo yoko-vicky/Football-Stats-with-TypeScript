@@ -1,15 +1,10 @@
-import fs from 'fs';
+import { CsvFileReader } from "./CsvFileReader";
+
 
 // 1. LOAD & PARSE DATA
-const matches = fs.readFileSync('football.csv', {
-  encoding: 'utf-8' // to return string, use utf-8
-})
-  .split('\n')
-  .map((row: string): string[] => row.split(','))
-  // row: [ '27/10/2018', 'Watford', 'Huddersfield', '3', '0', 'H', 'M Dean' ],
-// console.log(matches)
-
-
+const reader = new CsvFileReader('football.csv')
+reader.read()
+console.log(reader.data)
 
 // 2. ANALYZE DATAww
 
@@ -17,7 +12,7 @@ const matches = fs.readFileSync('football.csv', {
 enum MatchResults { HomeWin = 'H', AwayWin = 'A', Draw = 'D' }
 
 let manUnitedWins = 0;
-for (let match of matches) {
+for (let match of reader.data) {
   if ((match[1] === 'Man United' && match[5] === MatchResults.HomeWin ) ||
     (match[2] === 'Man United' && match[5] === MatchResults.AwayWin)) {
     manUnitedWins++
