@@ -1,5 +1,5 @@
 import { CsvFileReader } from "./CsvFileReader";
-
+import { dateStringToDate } from "./utils"
 
 // 1. LOAD & PARSE DATA
 const reader = new CsvFileReader('football.csv')
@@ -19,6 +19,8 @@ for (let match of reader.data) {
   }
 }
 
+
+console.log(dateStringToDate('18/02/2018'))
 
 // const matchResults = {
 //   homeWin: 'H',
