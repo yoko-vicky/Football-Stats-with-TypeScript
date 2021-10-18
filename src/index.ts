@@ -1,15 +1,25 @@
 import { CsvFileReader } from "./CsvFileReader";
+import { MatchReader } from "./MatchReader";
 import { dateStringToDate } from "./utils"
 import { MatchResult } from "./MatchResult";
 
 // 1. LOAD & PARSE DATA
-const reader = new CsvFileReader('football.csv')
-reader.read()
-console.log(reader.data[0])
+
+// Create an object that satisfies the DataReader interface
+const csvFileReader = new CsvFileReader('football.csv')
+
+// Create an instance of MatchReader and pass something that satisfies DataReader interface
+const matchReader = new MatchReader(csvFileReader)
+
+// Run load() method to MatchReader
+matchReader.load()
+
+// See if it works
+// console.log(matchReader.matches[0])
 
 // 2. ANALYZE DATAww
 let manUnitedWins = 0;
-for (let match of reader.data) {
+for (let match of matchReader.matches) {
   if ((match[1] === 'Man United' && match[5] === MatchResult.HomeWin ) ||
     (match[2] === 'Man United' && match[5] === MatchResult.AwayWin)) {
     manUnitedWins++
