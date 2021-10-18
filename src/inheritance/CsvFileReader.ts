@@ -1,20 +1,20 @@
-import fs from 'fs';
+// import fs from 'fs';
 
-export abstract class CsvFileReader<T>{
-  data: T[] = []
+// export abstract class CsvFileReader<T>{
+//   data: T[] = []
 
-  constructor(
-    public fileName: string
-  ) { }
+//   constructor(
+//     public fileName: string
+//   ) { }
 
-  abstract mapRow (row: string[]): T
+//   abstract mapRow (row: string[]): T
 
-  read (): void {
-    this.data = fs.readFileSync(this.fileName, {
-      encoding: 'utf-8' // to return string, use utf-8
-    })
-      .split('\n')
-      .map((row: string): string[] => row.split(','))
-      .map(this.mapRow)
-  }
-}
+//   read (): void {
+//     this.data = fs.readFileSync(this.fileName, {
+//       encoding: 'utf-8' // to return string, use utf-8
+//     })
+//       .split('\n')
+//       .map((row: string): string[] => row.split(','))
+//       .map(this.mapRow)
+//   }
+// }

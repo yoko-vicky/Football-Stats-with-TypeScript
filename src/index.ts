@@ -1,10 +1,12 @@
 import { CsvFileReader } from "./CsvFileReader";
 import { MatchReader } from "./MatchReader";
-import { dateStringToDate } from "./utils"
-import { MatchResult } from "./MatchResult";
+import { Summary } from "./Summary";
+import { AvarageGoalAnalysis } from "./analyzers/AvarageGoalsAnalysis";
+import { WinsAnalysis } from "./analyzers/WinsAnalysis";
+import { ConsoleReport } from "./reportTargets/ConsoleReport";
+import { HtmlReport } from "./reportTargets/HtmlReport";
 
 // 1. LOAD & PARSE DATA
-
 // Create an object that satisfies the DataReader interface
 const csvFileReader = new CsvFileReader('football.csv')
 
@@ -14,18 +16,22 @@ const matchReader = new MatchReader(csvFileReader)
 // Run load() method to MatchReader
 matchReader.load()
 
-// See if it works
-// console.log(matchReader.matches[0])
+// 2. ANALYZE & REPORT DATA
+// PREPARE DATA IN STEP 1
+const data = matchReader.matches
 
-// 2. ANALYZE DATAww
-let manUnitedWins = 0;
-for (let match of matchReader.matches) {
-  if ((match[1] === 'Man United' && match[5] === MatchResult.HomeWin ) ||
-    (match[2] === 'Man United' && match[5] === MatchResult.AwayWin)) {
-    manUnitedWins++
-  }
-}
-console.log(dateStringToDate('18/02/2018'))
+// ANALYZER
+const avarageGoalAnalysis = new AvarageGoalAnalysis()
+const winsAnalysis = new WinsAnalysis('Man United')
 
-// 3. REPORT DATA
-console.log(`Report: Man United wins ${manUnitedWins} games!`)
+// OUTPUT TARGET
+const consoleReport = new ConsoleReport()
+const htmlReport = new HtmlReport()
+
+// OUTOUT WITH COMBINATION OF ANALYZER & OUTPUT TARGET(WAYS)
+const winAnalysisConsoleSummary = new Summary(winsAnalysis, consoleReport)
+winAnalysisConsoleSummary.buildAndPrintReport(data)
+
+const winAnalysisHtmlSummary = new Summary(winsAnalysis, htmlReport)
+winAnalysisHtmlSummary.buildAndPrintReport(data)
+// To open report file from console, run 'open report.html'
