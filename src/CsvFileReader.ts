@@ -1,15 +1,13 @@
 import fs from 'fs';
-import { dateStringToDate } from "./utils";
-import { MatchResult } from "./MatchResult";
 
-type MatchData = [ Date, string, string, number, number, MatchResult, string ]
-
-export class CsvFileReader {
-  data: MatchData[] = []
+export abstract class CsvFileReader<T>{
+  data: T[] = []
 
   constructor(
     public fileName: string
-  ) {}
+  ) { }
+
+  abstract mapRow (row: string[]): T
 
   read (): void {
     this.data = fs.readFileSync(this.fileName, {
@@ -17,16 +15,6 @@ export class CsvFileReader {
     })
       .split('\n')
       .map((row: string): string[] => row.split(','))
-      .map((row: string[]): MatchData => {
-        return [
-          dateStringToDate(row[0]),
-          row[1],
-          row[2],
-          +row[3],
-          +row[4],
-          row[5] as MatchResult,　// TypeScript can infer the value should be 'H', 'A' or 'D'
-          row[6]
-        ]
-      } )
+      .map(this.mapRow)
   }
 }
