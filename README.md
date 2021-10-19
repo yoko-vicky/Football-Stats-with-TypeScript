@@ -1,6 +1,6 @@
 # Football-Stats-with-TypeScript
 ## About the Project
-I built this project that load and parse different type of data such as CSV, analyze and report in a different way. It consists of compositions including Analyzers, reportTargets classes, and Summary class. I used enums to handle Home/Away/Draw column of the data, created interfaces to implement them in each class instance object and created turple data types to handle the type of array elements. Instead of using inheritance, I used composition architecture so that it has scalability and flexibility. 
+I built this project that load and parse different type of data such as CSV, analyze and report in the other way. It consists of compositions including Analyzers, reportTargets classes, and Summary class. I used enums to handle the Home/Away/Draw column of the data, created interfaces to implement them in each class instance object, and created turple data types to take the type of array elements. Instead of using inheritance, I used composition architecture so that it has scalability and flexibility.
 
 A list of commonly used resources that I find helpful is listed in the acknowledgments.
 
